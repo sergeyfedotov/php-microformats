@@ -1,8 +1,12 @@
 <?php
 namespace Fsv\Microformats\Parser;
 
+use DOMNode;
+use DOMXPath;
 use Fsv\Microformats\Model\ContactName;
 use Fsv\Microformats\Model\HCard;
+use Symfony\Component\CssSelector\CssSelector;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class HCardParser
@@ -98,7 +102,7 @@ class HCardParser extends AbstractParser
      */
     public function parse($input)
     {
-        $objects = parent::parse($input);
+        $objects = parent::parse($this->removeNested($input));
 
         /** @var HCard $object */
         foreach ($objects as $object) {
@@ -136,6 +140,29 @@ class HCardParser extends AbstractParser
         }
 
         return $objects;
+    }
+
+    /**
+     * @param $input
+     * @return Crawler
+     */
+    private function removeNested($input)
+    {
+        $nodes = [];
+
+        foreach ($this->createCrawler($input) as $rootNode) {
+            $xpath = new DOMXPath($rootNode->ownerDocument);
+            $query = CssSelector::toXPath('.' . $this->getRootClassName() . ' .' . $this->getRootClassName());
+
+            /** @var DOMNode $nestedNode */
+            foreach ($xpath->query($query) as $nestedNode) {
+                $nestedNode->parentNode->removeChild($nestedNode);
+            }
+
+            $nodes[] = $rootNode;
+        }
+
+        return $nodes;
     }
 
     /**
