@@ -148,8 +148,13 @@ abstract class AbstractParser implements ParserInterface
 
         if ($nodeName == 'abbr') {
             $value = $propertyNode->attr('title');
-        } else if ($nodeName == 'a' && in_array($propertyName, static::$urlProperties)) {
+        } else if (
+            ($nodeName == 'a' || $propertyName == 'area')
+            && in_array($propertyName, static::$urlProperties)
+        ) {
             $value = $propertyNode->attr('href');
+        } else if ($nodeName == 'area') {
+            $value = $propertyNode->attr('alt');
         } else if ($nodeName == 'img') {
             $value = (string)$propertyNode->attr(in_array($propertyName, static::$urlProperties) ? 'src' : 'alt');
         } else if ($nodeName == 'object' && in_array($propertyName, static::$urlProperties)) {
