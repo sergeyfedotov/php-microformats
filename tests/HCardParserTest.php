@@ -169,15 +169,25 @@ HTML
 <div class="vcard">
     <span class="org">Organization Name</span>
 </div>
+<div class="vcard">
+    <span class="org">
+        <span class="organization-name">Organization Name</span>
+        <span class="organization-unit">Organization Unit 1</span>
+        <span class="organization-unit">Organization Unit 2</span>
+    </span>
+</div>
 HTML
         );
 
         $this->assertInstanceOf('Fsv\Microformats\Model\Organization', $objects[0]->getOrg());
         $this->assertInstanceOf('Fsv\Microformats\Model\Organization', $objects[1]->getOrg());
+        $this->assertInstanceOf('Fsv\Microformats\Model\Organization', $objects[2]->getOrg());
         $this->assertEquals('Organization Name', $objects[0]->getOrg()->getOrganizationName());
-        $this->assertEquals('Organization Unit', $objects[0]->getOrg()->getOrganizationUnit());
+        $this->assertEquals(['Organization Unit'], $objects[0]->getOrg()->getOrganizationUnit());
         $this->assertEquals('Organization Name', $objects[1]->getOrg()->getOrganizationName());
-        $this->assertNull($objects[1]->getOrg()->getOrganizationUnit());
+        $this->assertEmpty($objects[1]->getOrg()->getOrganizationUnit());
+        $this->assertEquals('Organization Name', $objects[2]->getOrg()->getOrganizationName());
+        $this->assertEquals(['Organization Unit 1', 'Organization Unit 2'], $objects[2]->getOrg()->getOrganizationUnit());
     }
 
     public function testRecognizeAdr()

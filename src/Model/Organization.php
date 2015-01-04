@@ -14,15 +14,15 @@ class Organization extends AbstractModel
     private $organizationName;
 
     /**
-     * @var string
+     * @var array
      */
     private $organizationUnit;
 
     /**
      * @param string $organizationName
-     * @param string $organizationUnit
+     * @param array $organizationUnit
      */
-    public function __construct($organizationName = null, $organizationUnit = null)
+    public function __construct($organizationName = null, array $organizationUnit = [])
     {
         $this->organizationName = $organizationName;
         $this->organizationUnit = $organizationUnit;
@@ -48,10 +48,10 @@ class Organization extends AbstractModel
     }
 
     /**
-     * @param string $organizationUnit
+     * @param array $organizationUnit
      * @return Organization
      */
-    public function setOrganizationUnit($organizationUnit)
+    public function setOrganizationUnit(array $organizationUnit)
     {
         $this->organizationUnit = $organizationUnit;
 
@@ -59,7 +59,7 @@ class Organization extends AbstractModel
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getOrganizationUnit()
     {
@@ -71,6 +71,6 @@ class Organization extends AbstractModel
      */
     public function __toString()
     {
-        return 'ORG:' . $this->organizationName . ';' . $this->organizationUnit;
+        return 'ORG:' . $this->organizationName . ';' . implode(';', $this->organizationUnit);
     }
 }

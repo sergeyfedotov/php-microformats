@@ -14,7 +14,13 @@ class OrganizationParser extends AbstractParser
      * @var array
      */
     protected static $singularProperties = [
-        'organization-name',
+        'organization-name'
+    ];
+
+    /**
+     * @var array
+     */
+    protected static $pluralProperties = [
         'organization-unit'
     ];
 
@@ -57,27 +63,5 @@ class OrganizationParser extends AbstractParser
         }
 
         return $objects;
-    }
-
-    /**
-     * @param string $propertyName
-     * @param mixed $value
-     * @return mixed
-     */
-    protected function convertValue($propertyName, $value)
-    {
-        if ($propertyName == 'value') {
-            if (is_array($value)) {
-                $value = implode('', $value);
-            }
-
-            if (0 === strpos($value, 'mailto:')) {
-                $value = substr($value, 7);
-            }
-
-            return $value;
-        }
-
-        return parent::convertValue($propertyName, $value);
     }
 }
