@@ -1,0 +1,28 @@
+{
+    "name": "fsv/microformats",
+    "description": "Microformats parser",
+    "keywords": [
+        "php",
+        "microformats",
+        "hcard",
+        "geo"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey Fedotov",
+            "email": "sergey89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/dom-crawler": "~2.6",
+        "symfony/property-access": "~2.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*"
+    },
+    "autoload": {
+        "psr-4": { "Fsv\\Microformats\\": "src/" }
+    }
+}
