@@ -584,7 +584,7 @@ class HCard extends AbstractModel
                         'TZ:'           . $this->tz,
                         'UID:'          . $this->uid,
                         implode("\n", $this->adr),
-                        'CATEGORY:'     . implode("\nCATEGORY:", $this->category),
+                        'CATEGORY:'     . implode(',', $this->category),
                         'EMAIL:'        . implode("\nEMAIL:", $this->email),
                         'KEY:'          . implode("\nKEY:", $this->key),
                         'LABEL:'        . implode("\nLABEL:", $this->label),
