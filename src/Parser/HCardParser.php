@@ -145,7 +145,7 @@ class HCardParser extends AbstractParser
      */
     protected function convertValue($propertyName, $value)
     {
-        if ($propertyName == 'bday') {
+        if ($propertyName == 'bday' || $propertyName == 'rev') {
             return new \DateTime($value);
         }
 

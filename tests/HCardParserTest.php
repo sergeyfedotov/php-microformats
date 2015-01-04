@@ -25,7 +25,6 @@ HTML
 <div class="vcard">
     <span class="class">Class Name</span>
     <span class="fn">Full Name</span>
-    <span class="rev">Revision</span>
     <span class="sequence">Sequence Number</span>
     <span class="sort-string">Sort String</span>
     <span class="tz">Time Zone</span>
@@ -36,7 +35,6 @@ HTML
 
         $this->assertEquals('Class Name',       $objects[0]->getClass());
         $this->assertEquals('Full Name',        $objects[0]->getFn());
-        $this->assertEquals('Revision',         $objects[0]->getRev());
         $this->assertEquals('Sequence Number',  $objects[0]->getSequence());
         $this->assertEquals('Sort String',      $objects[0]->getSortString());
         $this->assertEquals('Time Zone',        $objects[0]->getTz());
@@ -99,22 +97,25 @@ HTML
         $this->assertEquals(['http://example1.com/page1.html', 'http://example2.com/page2.html'], $objects[0]->getUrl());
     }
 
-    public function testRecognizeBday()
+    public function testRecognizeBdayAndRev()
     {
         $objects = $this->parseHCard(<<<HTML
 <div class="vcard">
     <abbr class="bday" title="1986-03-10">10.03.1986</abbr>
 </div>
 <div class="vcard">
-    <span class="bday">20 May 1981<span>
+    <span class="bday">20 May 1981</span>
+    <abbr class="rev" title="31 Dec 2014">31.12.2014</abbr>
 </div>
 HTML
         );
 
         $this->assertInstanceOf('DateTime', $objects[0]->getBday());
         $this->assertInstanceOf('DateTime', $objects[1]->getBday());
+        $this->assertInstanceOf('DateTime', $objects[1]->getRev());
         $this->assertEquals(new DateTime('1986-03-10'), $objects[0]->getBday());
         $this->assertEquals(new DateTime('1981-05-20'), $objects[1]->getBday());
+        $this->assertEquals(new DateTime('2014-12-31'), $objects[1]->getRev());
     }
 
     public function testRecognizeGeo()

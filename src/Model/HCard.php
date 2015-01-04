@@ -41,7 +41,7 @@ class HCard extends AbstractModel
     private $org;
 
     /**
-     * @var string
+     * @var DateTime
      */
     private $rev;
 
@@ -413,7 +413,7 @@ class HCard extends AbstractModel
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getRev()
     {
@@ -421,9 +421,9 @@ class HCard extends AbstractModel
     }
 
     /**
-     * @param string $rev
+     * @param DateTime $rev
      */
-    public function setRev($rev)
+    public function setRev(DateTime $rev = null)
     {
         $this->rev = $rev;
     }
@@ -572,13 +572,13 @@ class HCard extends AbstractModel
                     [
                         'BEGIN:VCARD',
                         'VERSION:3.0',
-                        'BDAY:' . ($this->bday !== null ? $this->bday->format(DateTime::ISO8601) : ''),
-                        'CLASS:' . $this->class,
-                        'FN:' . $this->fn,
+                        'BDAY:'         . ($this->bday !== null ? $this->bday->format(DateTime::ISO8601) : ''),
+                        'CLASS:'        . $this->class,
+                        'FN:'           . $this->fn,
                         $this->geo,
                         $this->n,
                         $this->org,
-                        'REV:'          . $this->rev,
+                        'REV:'          . ($this->rev !== null ? $this->rev->format(DateTime::ISO8601) : ''),
                         'SEQUENCE:'     . $this->sequence,
                         'SORT-STRING:'  . $this->sortString,
                         'TZ:'           . $this->tz,
