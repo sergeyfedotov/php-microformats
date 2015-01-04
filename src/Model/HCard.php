@@ -565,7 +565,7 @@ class HCard extends AbstractModel
             "/\n+/",
             "\n",
             preg_replace(
-                '/^[-\w]+:;*$/m',
+                '/^[-\w]+:?;*$/m',
                 '',
                 implode(
                     "\n",
