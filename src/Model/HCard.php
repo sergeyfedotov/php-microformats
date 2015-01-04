@@ -585,7 +585,7 @@ class HCard extends AbstractModel
                         'UID:'          . $this->uid,
                         implode("\n", $this->adr),
                         'CATEGORY:'     . implode(',', $this->category),
-                        'EMAIL:'        . implode("\nEMAIL:", $this->email),
+                        'EMAIL;'        . implode("\nEMAIL;", $this->email),
                         'KEY:'          . implode("\nKEY:", $this->key),
                         'LABEL:'        . implode("\nLABEL:", $this->label),
                         'LOGO:'         . implode("\nLOGO:", $this->logo),
@@ -596,7 +596,7 @@ class HCard extends AbstractModel
                         'ROLE:'         . implode("\nROLE:", $this->role),
                         'SOUND:'        . implode("\nSOUND:", $this->sound),
                         'TITLE:'        . implode("\nTITLE:", $this->title),
-                        'TEL:'          . implode("\nTEL:", $this->tel),
+                        'TEL;'          . implode("\nTEL;", $this->tel),
                         'URL:'          . implode("\nURL:", $this->url),
                         'END:VCARD'
                     ]
