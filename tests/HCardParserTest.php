@@ -223,15 +223,17 @@ HTML
         <span class="type">work</span>
         <span class="value">+0111</span><span class="value">2223344</span>
     </span>
+    <a class="tel" href="tel:+01112223344"><span class="type">work</span> phone</a>
 </div>
 HTML
         );
 
-        $this->assertCount(4, $objects[0]->getTel());
+        $this->assertCount(5, $objects[0]->getTel());
         $this->assertInstanceOf('Fsv\Microformats\Model\TypeValuePair', $objects[0]->getTel()[0]);
         $this->assertInstanceOf('Fsv\Microformats\Model\TypeValuePair', $objects[0]->getTel()[1]);
         $this->assertInstanceOf('Fsv\Microformats\Model\TypeValuePair', $objects[0]->getTel()[2]);
         $this->assertInstanceOf('Fsv\Microformats\Model\TypeValuePair', $objects[0]->getTel()[3]);
+        $this->assertInstanceOf('Fsv\Microformats\Model\TypeValuePair', $objects[0]->getTel()[4]);
         $this->assertEquals('+01112223344',     $objects[0]->getTel()[0]->getValue());
         $this->assertEquals(['VOICE'],          $objects[0]->getTel()[0]->getType());
         $this->assertEquals('+01112223344',     $objects[0]->getTel()[1]->getValue());
@@ -240,6 +242,8 @@ HTML
         $this->assertEquals(['home', 'work'],   $objects[0]->getTel()[2]->getType());
         $this->assertEquals('+01112223344',     $objects[0]->getTel()[3]->getValue());
         $this->assertEquals(['work'],           $objects[0]->getTel()[3]->getType());
+        $this->assertEquals('+01112223344',     $objects[0]->getTel()[4]->getValue());
+        $this->assertEquals(['work'],           $objects[0]->getTel()[4]->getType());
     }
 
     public function testRecognizeEmail()

@@ -107,6 +107,8 @@ class TypeValuePairParser extends AbstractParser
 
             if (0 === strpos($value, 'mailto:')) {
                 $value = substr($value, 7);
+            } else if (0 === strpos($value, 'tel:')) {
+                $value = substr($value, 4);
             }
         }
 
