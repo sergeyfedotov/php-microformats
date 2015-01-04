@@ -9,7 +9,7 @@ class HCardParserTest extends PHPUnit_Framework_TestCase
 <div class="vcard"></div>
 <div class="vcard"></div>
 HTML
-);
+        );
 
         $this->assertCount(2, $objects);
         $this->assertArrayHasKey(0, $objects);
@@ -32,7 +32,8 @@ HTML
     <span class="uid">Unique ID</span>
 </div>
 HTML
-);
+        );
+
         $this->assertEquals('Class Name',       $objects[0]->getClass());
         $this->assertEquals('Full Name',        $objects[0]->getFn());
         $this->assertEquals('Revision',         $objects[0]->getRev());
@@ -64,7 +65,7 @@ HTML
     <span class="title">Title 2</span>
 </div>
 HTML
-);
+        );
 
         $this->assertEquals(['Category 1', 'Category 2'],   $objects[0]->getCategory());
         $this->assertEquals(['Key 1', 'Key 2'],             $objects[0]->getKey());
@@ -90,7 +91,7 @@ HTML
     <a class="url" href="http://example2.com/page2.html">Link 2</a>
 </div>
 HTML
-);
+        );
 
         $this->assertEquals(['http://example1.com/logo1.png', 'http://example2.com/logo2.png'], $objects[0]->getLogo());
         $this->assertEquals(['http://example1.com/photo1.jpg', 'http://example2.com/photo2.jpg'], $objects[0]->getPhoto());
@@ -108,7 +109,7 @@ HTML
     <span class="bday">20 May 1981<span>
 </div>
 HTML
-);
+        );
 
         $this->assertInstanceOf('DateTime', $objects[0]->getBday());
         $this->assertInstanceOf('DateTime', $objects[1]->getBday());
@@ -126,7 +127,7 @@ HTML
     </span>
 </div>
 HTML
-);
+        );
 
         $this->assertInstanceOf('Fsv\Microformats\Model\Geo', $objects[0]->getGeo());
         $this->assertEquals(48.816667, $objects[0]->getGeo()->getLatitude());
@@ -146,7 +147,7 @@ HTML
     </span>
 </div>
 HTML
-);
+        );
 
         $this->assertInstanceOf('Fsv\Microformats\Model\ContactName', $objects[0]->getN());
         $this->assertEquals('Given Name',       $objects[0]->getN()->getGivenName());
@@ -250,7 +251,7 @@ HTML
     <a class="email" href="mailto:user@example.com"><span class="type">pref</span> email</a>
 </div>
 HTML
-);
+        );
 
         $this->assertCount(3, $objects[0]->getEmail());
         $this->assertInstanceOf('Fsv\Microformats\Model\TypeValuePair', $objects[0]->getEmail()[0]);
@@ -271,7 +272,7 @@ HTML
     <span class="fn">Sergey Fedotov</span>
 </div>
 HTML
-);
+        );
 
         $this->assertInstanceOf('Fsv\Microformats\Model\ContactName', $objects[0]->getN());
         $this->assertEquals('Sergey', $objects[0]->getN()->getGivenName());
@@ -285,7 +286,7 @@ HTML
     <span class="fn">Fedotov, Sergey</span>
 </div>
 HTML
-);
+        );
 
         $this->assertInstanceOf('Fsv\Microformats\Model\ContactName', $objects[0]->getN());
         $this->assertEquals('Sergey', $objects[0]->getN()->getGivenName());
@@ -299,7 +300,7 @@ HTML
     <span class="fn">nickname</span>
 </div>
 HTML
-);
+        );
 
         $this->assertEquals(['nickname'], $objects[0]->getNickname());
     }
@@ -311,7 +312,7 @@ HTML
     <span class="fn">Sergey Fedotov</span>
 </div>
 HTML
-);
+        );
 
         $this->assertEmpty($objects[0]->getNickname());
     }
