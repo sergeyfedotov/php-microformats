@@ -47,6 +47,7 @@ HTML
 <div class="vcard">
     <span class="category">Category 1</span>
     <span class="category">Category 2</span>
+    <abbr class="category" title="category3,category4"></abbr>
     <span class="key">Key 1</span>
     <span class="key">Key 2</span>
     <span class="label">Label 1</span>
@@ -65,7 +66,7 @@ HTML
 HTML
         );
 
-        $this->assertEquals(['Category 1', 'Category 2'],   $objects[0]->getCategory());
+        $this->assertEquals(['Category 1', 'Category 2', 'category3', 'category4'], $objects[0]->getCategory());
         $this->assertEquals(['Key 1', 'Key 2'],             $objects[0]->getKey());
         $this->assertEquals(['Label 1', 'Label 2'],         $objects[0]->getLabel());
         $this->assertEquals(['Mailer 1', 'Mailer 2'],       $objects[0]->getMailer());

@@ -137,6 +137,23 @@ class HCardParser extends AbstractParser
                     $object->setNickname([$object->getFn()]);
                 }
             }
+
+            /* categories may be comma separated */
+            $categories = $object->getCategory();
+
+            foreach ($categories as $i => $category) {
+                if (false !== strpos($category, ',')) {
+                    foreach (explode(',', $category) as $k => $v) {
+                        if ($k > 0) {
+                            $categories[] = trim($v);
+                        } else {
+                            $categories[$i] = trim($v);
+                        }
+                    }
+                }
+            }
+
+            $object->setCategory($categories);
         }
 
         return $objects;
